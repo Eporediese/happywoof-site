@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Woof – Dog Walking & Nature Hikes in Georgetown, CT</title>
+    <meta name="description" content="Supervised fun with the Georgetown, CT woof pack. Nature hikes and adventures for dogs since 2007.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A7C59;
+            --primary-dark: #3D6B4A;
+            --secondary: #E8985E;
+            --cream: #FDF8F3;
+            --text: #2D3436;
+            --text-light: #636E72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--cream);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .hero-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(232, 152, 94, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h2 span {
+            color: var(--secondary);
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image .image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: 0 20px 40px rgba(74, 124, 89, 0.3);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -1rem;
+            right: -1rem;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(232, 152, 94, 0.4);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--cream);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item:nth-child(2) { background: linear-gradient(135deg, var(--secondary) 0%, #D4845A 100%); }
+        .gallery-item:nth-child(3) { background: linear-gradient(135deg, #5A9E6F 0%, var(--primary) 100%); }
+        .gallery-item:nth-child(4) { background: linear-gradient(135deg, #D4845A 0%, var(--secondary) 100%); }
+        .gallery-item:nth-child(5) { background: linear-gradient(135deg, var(--primary) 0%, #5A9E6F 100%); }
+        .gallery-item:nth-child(6) { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%); }
+
+        .gallery-note {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Services Section */
+        .services {
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--cream);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+        }
+
+        /* Area Section */
+        .area {
+            background: var(--primary);
+            color: white;
+        }
+
+        .area h2 {
+            color: white;
+        }
+
+        .area h2 span {
+            color: var(--secondary);
+        }
+
+        .area-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .area-tag {
+            background: rgba(255,255,255,0.15);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.7);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-placeholder"></div>
+        <!-- Replace with: <video class="hero-video" autoplay muted loop playsinline src="your-video.mp4"></video> -->
+        <div class="hero-content">
+            <h1 class="logo">Happy <span>Woof</span> 🐕</h1>
+            <p class="tagline">Supervised fun with the Georgetown, CT woof pack</p>
+            <a href="#contact" class="hero-cta">Get in Touch</a>
+        </div>
+        <div class="scroll-hint">↓</div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Nature Hikes for <span>Happy Dogs</span></h2>
+                    <p>We bring exercise, companionship, joy, and an exciting break into the daily routine of dogs in the Georgetown, Connecticut area.</p>
+                    <p>Since 2007, the Happy Woof pack has grown into a community of dogs that are comfortable with each other and themselves. Our four-legged friends love jumping into the Woof Mobile together for their next adventure.</p>
+                    <p>Every hike is supervised, safe, and designed to let dogs be dogs — exploring trails, making friends, and coming home happily tired.</p>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">🐾</div>
+                    <div class="experience-badge">Since 2007</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2>The <span>Pack</span> in Action</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">🐕</div>
+                <div class="gallery-item">🦮</div>
+                <div class="gallery-item">🐾</div>
+                <div class="gallery-item">🌲</div>
+                <div class="gallery-item">🐶</div>
+                <div class="gallery-item">🌿</div>
+            </div>
+            <p class="gallery-note">Your photos will go here — showing happy pups on their adventures!</p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>What We <span>Offer</span></h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🥾</div>
+                    <h3>Group Hikes</h3>
+                    <p>Off-leash adventures on local trails with a supervised pack of friendly dogs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚐</div>
+                    <h3>Door-to-Door</h3>
+                    <p>We pick up and drop off in the Woof Mobile — no hassle for you.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🐕‍🦺</div>
+                    <h3>Pack Socialization</h3>
+                    <p>Dogs learn to be comfortable around other dogs in a safe, natural setting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Area -->
+    <section class="area" id="area">
+        <div class="container">
+            <h2>Our <span>Territory</span></h2>
+            <div class="area-list">
+                <span class="area-tag">Georgetown</span>
+                <span class="area-tag">Wilton</span>
+                <span class="area-tag">Redding</span>
+                <span class="area-tag">Ridgefield</span>
+                <span class="area-tag">Weston</span>
+                <span class="area-tag">Surrounding Areas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Ready to <span>Join the Pack?</span></h2>
+            <p>Drop us a line to learn more about our hikes and see if we're the right fit for your pup.</p>
+            <a href="mailto:hello@happywoof.com" class="contact-btn">Say Hello 👋</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Happy Woof LLC · Georgetown, CT</p>
+    </footer>
+</body>
+</html>
