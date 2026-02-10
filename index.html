@@ -86,6 +86,60 @@
             color: var(--secondary);
         }
 
+        .logo-dog {
+            display: inline-block;
+            position: absolute;
+            font-size: 3rem;
+            bottom: 20px;
+            animation: walkAcross 8s linear infinite;
+        }
+
+        @keyframes walkAcross {
+            0% { 
+                left: -10%; 
+                transform: translateY(0) scaleX(1);
+            }
+            5% { transform: translateY(-5px) scaleX(1); }
+            10% { transform: translateY(0) scaleX(1); }
+            15% { transform: translateY(-5px) scaleX(1); }
+            20% { transform: translateY(0) scaleX(1); }
+            25% { transform: translateY(-5px) scaleX(1); }
+            30% { transform: translateY(0) scaleX(1); }
+            35% { transform: translateY(-5px) scaleX(1); }
+            40% { transform: translateY(0) scaleX(1); }
+            45% { transform: translateY(-5px) scaleX(1); }
+            48% { 
+                left: 110%; 
+                transform: translateY(0) scaleX(1);
+            }
+            50% { 
+                left: 110%; 
+                transform: translateY(0) scaleX(-1);
+            }
+            55% { transform: translateY(-5px) scaleX(-1); }
+            60% { transform: translateY(0) scaleX(-1); }
+            65% { transform: translateY(-5px) scaleX(-1); }
+            70% { transform: translateY(0) scaleX(-1); }
+            75% { transform: translateY(-5px) scaleX(-1); }
+            80% { transform: translateY(0) scaleX(-1); }
+            85% { transform: translateY(-5px) scaleX(-1); }
+            90% { transform: translateY(0) scaleX(-1); }
+            95% { transform: translateY(-5px) scaleX(-1); }
+            98% { 
+                left: -10%; 
+                transform: translateY(0) scaleX(-1);
+            }
+            100% { 
+                left: -10%; 
+                transform: translateY(0) scaleX(1);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            overflow: visible;
+        }
+
         .tagline {
             font-size: 1.5rem;
             font-weight: 400;
@@ -441,7 +495,8 @@
         <img src="images/pack_in_snow-1024x765.jpg" alt="Happy dogs in the snow" class="hero-image">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="logo">Happy <span>Woof</span> 🐕</h1>
+            <h1 class="logo">Happy <span>Woof</span> LLC</h1>
+            <div class="logo-dog">🐕</div>
             <p class="tagline">Supervised fun with the Georgetown, CT woof pack</p>
             <a href="#contact" class="hero-cta">Get in Touch</a>
         </div>
@@ -490,19 +545,19 @@
                     <img src="images/hw_pic1-1024x1024.jpg" alt="Dogs hiking">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/Fresco-1024x768.jpg" alt="Happy dog Fresco">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/ozzie_whiskey_whelan.jpg" alt="Dogs in the woof mobile">
-                </div>
-                <div class="gallery-item">
                     <img src="images/pack_in_snow-1024x765.jpg" alt="Pack in the snow">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/blue-768x1024.jpg" alt="Happy dog Blue">
+                    <img src="images/flex-a-pet2.jpg" alt="Happy dogs on adventure">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/www_2.jpg" alt="Happy woof moment">
+                    <img src="images/thumbnail-1.jpg" alt="Woof pack hiking">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/thumbnail-2.jpg" alt="Dogs on the trail">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/thumbnail-4.jpg" alt="Happy pups outdoors">
                 </div>
             </div>
         </div>
@@ -566,7 +621,7 @@
     <section class="contact" id="contact">
         <div class="container">
             <h2>Ready to <span>Join the Pack?</span></h2>
-            <img src="images/Fresco-1024x768.jpg" alt="Happy dog Fresco" class="contact-image">
+            <img src="images/thumbnail-2.jpg" alt="Happy dogs" class="contact-image">
             <p>Reach out to include your dog(s) in the Georgetown Woof Pack!</p>
             <a href="https://happywoof.com/contact/" class="contact-btn">Contact Us 👋</a>
         </div>
