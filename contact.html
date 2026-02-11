@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Happy Woof LLC</title>
+    <meta name="description" content="Get in touch with Happy Woof LLC – dog walking & nature hikes in Georgetown, CT. No spam, privacy‑first contact form.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A7C59;
+            --primary-dark: #3D6B4A;
+            --secondary: #E8985E;
+            --cream: #FDF8F3;
+            --text: #2D3436;
+            --text-light: #636E72;
+        }
+        * {margin:0;padding:0;box-sizing:border-box;}
+        html {scroll-behavior:smooth;}
+        body {font-family:'Nunito',sans-serif;color:var(--text);line-height:1.6;background:var(--cream);}
+        .hero {position:relative;height:70vh;min-height:400px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);}
+        .hero-image {position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.4;}
+        .hero-overlay {position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(74,124,89,0.7) 0%,rgba(61,107,74,0.8) 100%);}
+        .hero-content {position:relative;z-index:2;text-align:center;color:white;padding:2rem;max-width:800px;}
+        .logo {font-size:3.5rem;font-weight:800;margin-bottom:0.5rem;text-shadow:2px 2px 4px rgba(0,0,0,0.2);}
+        .logo span {color:var(--secondary);}
+        .tagline {font-size:1.3rem;font-weight:400;opacity:0.95;margin-bottom:2rem;}
+        .container {max-width:1100px;margin:0 auto;padding:2rem;}
+        h2 {font-size:2.5rem;font-weight:800;color:var(--primary);margin-bottom:1.5rem;text-align:center;}
+        h2 span {color:var(--secondary);}
+        .contact-form {background:var(--cream);padding:3rem 2rem;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+        .contact-form label {display:block;margin-top:1rem;font-weight:600;}
+        .contact-form input,.contact-form textarea {width:100%;padding:0.8rem;margin-top:0.4rem;border:1px solid #ccc;border-radius:8px;font-family:inherit;}
+        .contact-btn {display:inline-block;background:var(--primary);color:white;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:700;font-size:1.1rem;margin-top:2rem;width:100%;transition:background .3s,transform .3s;}
+        .contact-btn:hover {background:var(--primary-dark);transform:translateY(-2px);}
+        .privacy-note {font-size:0.9rem;color:var(--text-light);margin-top:1rem;text-align:center;}
+        .contact-details {display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:3rem;}
+        .contact-details div {margin:1rem;}
+        .contact-details h3 {color:var(--primary);margin-bottom:0.5rem;}
+        .map img {width:100%;max-width:600px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.1);margin:2rem auto;display:block;}
+        footer {background:var(--text);color:rgba(255,255,255,0.7);padding:2rem;text-align:center;}
+        footer p {font-size:0.9rem;}
+        @media (max-width:900px){.contact-details{flex-direction:column;align-items:center;}}
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <img src="images/pack_in_snow-1024x765.jpg" alt="Happy dogs in the snow" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="logo">Contact <span>Woof</span> LLC</h1>
+            <p class="tagline">We’d love to hear from you – no spam, just happy tails.</p>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form" id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <p class="hidden"><label>Don’t fill this out: <input name="bot-field"></label></p>
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit" class="contact-btn">Send Message</button>
+            </form>
+            <p class="privacy-note">We only use this info to reply to you. No marketing or storage beyond the email reply.</p>
+        </div>
+    </section>
+
+    <!-- Contact Details -->
+    <section class="contact-details">
+        <div class="container">
+            <div>
+                <h3>Phone</h3>
+                <p>+1 (555) 123‑4567</p>
+            </div>
+            <div>
+                <h3>Email</h3>
+                <p><a href="mailto:hello@happywoof.com" style="color:var(--primary);text-decoration:none;">hello@happywoof.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map (static image) -->
+    <section class="map">
+        <div class="container">
+            <img src="images/map-placeholder.svg" alt="Map of Georgetown, CT service area">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Happy Woof LLC · Georgetown, CT</p>
+    </footer>
+</body>
+</html>
