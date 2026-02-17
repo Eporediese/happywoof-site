@@ -249,29 +249,15 @@
         }
 
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 1.5rem;
             margin-top: 3rem;
-        }
-        
-        /* Center last item if it's alone in its row */
-        .gallery-item:last-child:nth-child(3n + 1) {
-            grid-column: 2;
-        }
-        
-        /* Center last two items if they're alone in their row */
-        .gallery-item:nth-last-child(2):nth-child(3n + 1) {
-            grid-column: 1;
-        }
-        
-        .gallery-item:last-child:nth-child(3n + 2) {
-            grid-column: 2 / 4;
-            margin: 0 auto;
-            max-width: calc((100% - 1.5rem) / 2);
+            justify-content: center;
         }
 
         .gallery-item {
+            width: calc(33.333% - 1rem);
             aspect-ratio: 1;
             border-radius: 15px;
             overflow: hidden;
@@ -611,8 +597,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .gallery-item {
+                width: calc(50% - 0.75rem);
             }
         }
 
@@ -630,8 +616,11 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr 1fr;
                 gap: 1rem;
+            }
+            
+            .gallery-item {
+                width: calc(50% - 0.5rem);
             }
         }
     </style>
@@ -728,7 +717,7 @@
             <h2>See the <span>Pack</span> in Motion</h2>
             <div class="video-container">
                 <iframe 
-                    src="https://www.youtube.com/embed/B3fNGehmsBE?modestbranding=1&rel=0" 
+                    src="https://www.youtube.com/embed/B3fNGehmsBE?autoplay=1&mute=1&modestbranding=1&rel=0" 
                     title="Happy Woof Pack Adventures"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
