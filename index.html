@@ -408,7 +408,7 @@
         }
 
         .old-fellows-text h2 {
-            text-align: left;
+            text-align: center;
             margin-bottom: 1.5rem;
         }
 
@@ -416,6 +416,43 @@
             font-size: 1.2rem;
             color: var(--text-light);
             line-height: 1.8;
+        }
+
+        /* Warning Section */
+        .warning-section {
+            background: var(--cream);
+            padding: 6rem 2rem;
+        }
+
+        .warning-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .warning-image {
+            position: relative;
+        }
+
+        .warning-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(232, 152, 94, 0.3);
+        }
+
+        .warning-text h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .warning-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: center;
         }
 
         /* Area Section */
@@ -505,7 +542,8 @@
         @media (max-width: 900px) {
             .about-content,
             .woof-mobile-content,
-            .old-fellows-content {
+            .old-fellows-content,
+            .warning-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -610,16 +648,10 @@
                     <img src="images/gallery_whiskey.jpg" alt="Whiskey the happy dog" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery_F_Noisette.jpg" alt="Noisette in the pack" loading="lazy">
-                </div>
-                <div class="gallery-item">
                     <img src="images/gallery_whiskey river.jpg" alt="Whiskey River on adventure" loading="lazy">
                 </div>
                 <div class="gallery-item">
                     <img src="images/gallery_Whiskey_StPatricks.jpg" alt="Whiskey on St. Patrick's Day" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/flex-a-pet2.jpg" alt="Happy dogs on adventure" loading="lazy">
                 </div>
                 <div class="gallery-item">
                     <img src="images/Fresco-1024x768.jpg" alt="Happy dog Fresco" loading="lazy">
@@ -689,6 +721,19 @@
                 <h2>Old Fellows <span>Always Welcome</span></h2>
                 <p>Age is just a number in the Happy Woof pack. Our senior dogs bring wisdom, calm energy, and gentle companionship to every adventure.</p>
                 <p>Whether they prefer a leisurely stroll or still have pep in their step, every old fellow gets the pace and care they deserve.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Section -->
+    <section class="warning-section">
+        <div class="warning-content">
+            <div class="warning-text">
+                <h2><span>Warning</span></h2>
+                <p>I might love your dog as much as if he or she was my own.</p>
+            </div>
+            <div class="warning-image">
+                <img src="images/gallery_F_Noisette.jpg" alt="Noisette receiving lots of love">
             </div>
         </div>
     </section>
