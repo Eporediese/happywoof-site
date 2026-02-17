@@ -253,6 +253,11 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin-top: 3rem;
+            justify-items: center;
+        }
+        
+        .gallery-grid > * {
+            width: 100%;
         }
 
         .gallery-item {
@@ -271,7 +276,7 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: contain; background: var(--cream);
+            object-fit: cover;
         }
 
         .gallery-caption {
@@ -767,7 +772,7 @@
             </div>
             <div class="challenge-text">
                 <h2>Dogs Will Be Challenged to <span>Their Best Abilities</span> on Our Walks</h2>
-                <p>Being still and obedient walking on the leash, or left alone amongst our safe pack of friendly dogs, to explore their own doggy boundaries!</p>
+                <p>Whether staying calm and obedient on the leash, or being left alone to explore amongst our safe pack of friendly dogs—each pup discovers their own boundaries!</p>
             </div>
         </div>
     </section>
