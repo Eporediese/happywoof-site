@@ -274,6 +274,25 @@
             object-fit: contain; background: var(--cream);
         }
 
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1rem 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
         /* Video Section */
         .video-section {
             background: white;
@@ -560,7 +579,8 @@
                     <img src="images/gallery_whiskey river.jpg" alt="Whiskey River on adventure" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery_old_guys_welcome.jpg" alt="Old guys are welcome too!" loading="lazy">
+                    <img src="images/gallery_old_guys_welcome.jpg" alt="Old fellows always welcome" loading="lazy">
+                    <div class="gallery-caption">Old fellows always welcome</div>
                 </div>
                 <div class="gallery-item">
                     <img src="images/gallery_Whiskey_StPatricks.jpg" alt="Whiskey on St. Patrick's Day" loading="lazy">
