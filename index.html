@@ -382,6 +382,42 @@
             color: var(--text-light);
         }
 
+        /* Old Fellows Section */
+        .old-fellows {
+            background: white;
+            padding: 6rem 2rem;
+        }
+
+        .old-fellows-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .old-fellows-image {
+            position: relative;
+        }
+
+        .old-fellows-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(74, 124, 89, 0.3);
+        }
+
+        .old-fellows-text h2 {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .old-fellows-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
         /* Area Section */
         .area {
             background: var(--primary);
@@ -468,7 +504,8 @@
         /* Responsive */
         @media (max-width: 900px) {
             .about-content,
-            .woof-mobile-content {
+            .woof-mobile-content,
+            .old-fellows-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -579,10 +616,6 @@
                     <img src="images/gallery_whiskey river.jpg" alt="Whiskey River on adventure" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery_old_guys_welcome.jpg" alt="Old fellows always welcome" loading="lazy">
-                    <div class="gallery-caption">Old fellows always welcome</div>
-                </div>
-                <div class="gallery-item">
                     <img src="images/gallery_Whiskey_StPatricks.jpg" alt="Whiskey on St. Patrick's Day" loading="lazy">
                 </div>
                 <div class="gallery-item">
@@ -642,6 +675,20 @@
                     <h3>Pack Socialization</h3>
                     <p>Dogs learn to be comfortable around other dogs in a safe, natural setting.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Old Fellows Welcome -->
+    <section class="old-fellows">
+        <div class="old-fellows-content">
+            <div class="old-fellows-image">
+                <img src="images/gallery_old_guys_welcome.jpg" alt="Senior dogs relaxing together">
+            </div>
+            <div class="old-fellows-text">
+                <h2>Old Fellows <span>Always Welcome</span></h2>
+                <p>Age is just a number in the Happy Woof pack. Our senior dogs bring wisdom, calm energy, and gentle companionship to every adventure.</p>
+                <p>Whether they prefer a leisurely stroll or still have pep in their step, every old fellow gets the pace and care they deserve.</p>
             </div>
         </div>
     </section>
