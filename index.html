@@ -253,11 +253,22 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin-top: 3rem;
-            justify-items: center;
         }
         
-        .gallery-grid > * {
-            width: 100%;
+        /* Center last item if it's alone in its row */
+        .gallery-item:last-child:nth-child(3n + 1) {
+            grid-column: 2;
+        }
+        
+        /* Center last two items if they're alone in their row */
+        .gallery-item:nth-last-child(2):nth-child(3n + 1) {
+            grid-column: 1;
+        }
+        
+        .gallery-item:last-child:nth-child(3n + 2) {
+            grid-column: 2 / 4;
+            margin: 0 auto;
+            max-width: calc((100% - 1.5rem) / 2);
         }
 
         .gallery-item {
@@ -276,7 +287,7 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; background: var(--cream);
         }
 
         .gallery-caption {
