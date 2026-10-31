@@ -1,0 +1,4 @@
+[build]
+  # Only the contents of public/ are deployed. Everything else in this
+  # repo (originals/, tooling) stays out of the published site.
+  publish = "public"
