@@ -337,11 +337,21 @@
             text-align: center;
         }
 
-        .woof-mobile-image img {
+        .woof-mobile-image img,
+        .woof-mobile-image video {
             width: 100%;
             max-width: 300px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        /* Visitors who ask for reduced motion get the still frame instead
+           of the looping clip. */
+        .woof-mobile-image .still { display: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .woof-mobile-image video { display: none; }
+            .woof-mobile-image .still { display: inline-block; }
         }
 
         /* Services Section */
@@ -669,7 +679,13 @@
                     <p>Happy Woofers love to jump into the Woof Mobile together on their way to another adventure!</p>
                 </div>
                 <div class="woof-mobile-image">
-                    <img src="images/Jack_Russell-1.gif" alt="Happy dog ready for adventure">
+                    <video autoplay loop muted playsinline preload="metadata"
+                           poster="images/woof-mobile-poster.jpg"
+                           aria-label="Happy dog ready for adventure">
+                        <source src="images/woof-mobile.webm" type="video/webm">
+                        <source src="images/woof-mobile.mp4" type="video/mp4">
+                    </video>
+                    <img class="still" src="images/woof-mobile-poster.jpg" alt="Happy dog ready for adventure">
                 </div>
             </div>
         </div>
