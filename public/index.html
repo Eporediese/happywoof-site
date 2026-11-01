@@ -400,6 +400,103 @@
             border: none;
         }
 
+        /* YouTube's own full-screen button is inside its control bar, which
+           hides itself until you move the pointer over a playing video, so
+           nobody finds it. This is a visible one.
+
+           It sits under the card rather than on top of it: the corners of the
+           player are where YouTube puts its own title bar and controls on
+           hover, and an overlaid button covers them. */
+        .video-fs-row {
+            max-width: 800px;
+            margin: 0.75rem auto 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .video-fs {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(0,0,0,0.12);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--text-light);
+            font: inherit;
+            font-size: 0.95rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .video-fs:hover,
+        .video-fs:focus-visible {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        .video-fs svg { width: 1em; height: 1em; fill: currentColor; }
+
+        /* Native full screen: the card's rounding, shadow and 800px cap all
+           have to come off, or the video sits in a small rounded box in the
+           middle of a black screen. */
+        .video-container:fullscreen,
+        .video-container:-webkit-full-screen {
+            max-width: none;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: none;
+            background: black;
+            display: flex;
+            align-items: center;
+        }
+        .video-container:fullscreen iframe,
+        .video-container:-webkit-full-screen iframe {
+            height: 100%;
+            aspect-ratio: auto;
+        }
+
+        /* Fallback for iOS Safari, which will not put an arbitrary element
+           into full screen. The card is lifted out over a dark backdrop at
+           the size of the window instead, which is as close as that browser
+           allows without handing the viewer off to the YouTube app. */
+        body.video-expanded { overflow: hidden; }
+        .video-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+            background: rgba(0,0,0,0.92);
+        }
+        /* The button lives outside the card, so when the card is lifted out
+           the button has to come with it or it is stranded under the
+           backdrop with no way to close. */
+        body.video-expanded .video-fs-row {
+            position: fixed;
+            z-index: 902;
+            bottom: 1.25rem;
+            left: 0;
+            right: 0;
+            max-width: none;
+            margin: 0;
+            justify-content: center;
+        }
+        body.video-expanded .video-fs {
+            color: white;
+            border-color: rgba(255,255,255,0.4);
+        }
+        .video-container.is-expanded {
+            position: fixed;
+            z-index: 901;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(100vw, calc((100vh - 2rem) * 16 / 9));
+            max-width: none;
+            margin: 0;
+            border-radius: 0;
+        }
+
         /* Woof Mobile Section */
         .woof-mobile {
             background: var(--cream);
@@ -903,13 +1000,19 @@
     <section class="video-section" id="video">
         <div class="container">
             <h2>See the <span>Pack</span> in Motion</h2>
-            <div class="video-container">
-                <iframe 
-                    src="https://www.youtube.com/embed/B3fNGehmsBE?modestbranding=1&rel=0" 
+            <div class="video-container" id="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/B3fNGehmsBE?modestbranding=1&rel=0"
                     title="Happy Woof Pack Adventures"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
+            </div>
+            <div class="video-fs-row">
+                <button type="button" class="video-fs" id="video-fs" hidden>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V3h6v2H5v4H3zm12-6h6v6h-2V5h-4V3zM3 15h2v4h4v2H3v-6zm16 0h2v6h-6v-2h4v-4z"/></svg>
+                    Full screen
+                </button>
             </div>
         </div>
     </section>
@@ -1023,5 +1126,66 @@
     <footer>
         <p>© 2026 Happy Woof LLC · Georgetown, CT</p>
     </footer>
+
+    <!-- The only script on the page. The button is marked hidden in the markup
+         and revealed here, so a visitor with scripting off is never shown a
+         control that cannot do anything. -->
+    <script>
+    (function () {
+        var box = document.getElementById('video-container');
+        var btn = document.getElementById('video-fs');
+        if (!box || !btn) return;
+
+        var request = box.requestFullscreen || box.webkitRequestFullscreen;
+        var exit = document.exitFullscreen || document.webkitExitFullscreen;
+        var backdrop = null;
+
+        function isNative() {
+            return document.fullscreenElement === box || document.webkitFullscreenElement === box;
+        }
+        function isExpanded() {
+            return box.classList.contains('is-expanded');
+        }
+        function label() {
+            btn.lastChild.nodeValue = (isNative() || isExpanded()) ? ' Exit full screen' : ' Full screen';
+        }
+        function expand() {
+            backdrop = document.createElement('div');
+            backdrop.className = 'video-backdrop';
+            backdrop.addEventListener('click', collapse);
+            document.body.appendChild(backdrop);
+            document.body.classList.add('video-expanded');
+            box.classList.add('is-expanded');
+            label();
+        }
+        function collapse() {
+            box.classList.remove('is-expanded');
+            document.body.classList.remove('video-expanded');
+            if (backdrop) { backdrop.remove(); backdrop = null; }
+            label();
+        }
+
+        btn.addEventListener('click', function () {
+            if (isExpanded()) { collapse(); return; }
+            if (isNative()) { exit.call(document); return; }
+            if (request) {
+                // Safari on iPhone exposes the method but rejects it for
+                // anything that is not a <video>, so fall back on the reject.
+                var p = request.call(box);
+                if (p && p.catch) { p.catch(expand); }
+            } else {
+                expand();
+            }
+        });
+
+        document.addEventListener('fullscreenchange', label);
+        document.addEventListener('webkitfullscreenchange', label);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isExpanded()) collapse();
+        });
+
+        btn.hidden = false;
+    })();
+    </script>
 </body>
 </html>
