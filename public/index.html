@@ -93,58 +93,107 @@
             color: var(--secondary);
         }
 
-        .logo-dog {
-            display: inline-block;
+        /* The hero dog. Drawn as an SVG out of separate pieces so each leg can
+           hinge at its own hip — an emoji is one flat glyph and cannot do this.
+           It trots across, turns on the spot, walks back lifting the prints it
+           left, then rests off-stage. 20 seconds for the round trip. */
+        .hero-walk {
             position: absolute;
-            font-size: 3rem;
-            bottom: 20px;
-            animation: walkAcross 8s linear infinite;
+            left: 0;
+            bottom: 90px;
+            z-index: 1;
+            will-change: transform;
+            animation: hwCross 20s linear infinite;
         }
 
-        @keyframes walkAcross {
-            0% { 
-                left: -10%; 
-                transform: translateY(0) scaleX(-1);
+        .hero-walk .face { display: block; animation: hwTurn 20s linear infinite; }
+        .hero-walk .bob { display: block; animation: hwBob .5s ease-in-out infinite; }
+
+        .hero-dog { display: block; width: 72px; height: 54px; }
+        .hero-dog .solid { fill: #fff; }
+        .hero-dog .far { fill: rgba(255,255,255,.58); }
+        .hero-dog .leg { transform-box: view-box; }
+
+        /* The near and far pairs are half a cycle apart and move on the
+           diagonal, which is what a trot actually is. */
+        .hero-dog .leg-fn { transform-origin: 42.7px 29px; animation: hwStride .5s ease-in-out infinite; }
+        .hero-dog .leg-rf { transform-origin: 18.5px 29px; animation: hwStride .5s ease-in-out infinite; }
+        .hero-dog .leg-ff { transform-origin: 41.5px 29px; animation: hwStride .5s ease-in-out infinite -.25s; }
+        .hero-dog .leg-rn { transform-origin: 19.7px 29px; animation: hwStride .5s ease-in-out infinite -.25s; }
+        .hero-dog .tail { transform-box: view-box; transform-origin: 15px 19px; animation: hwWag .34s ease-in-out infinite; }
+
+        @keyframes hwCross {
+            0%   { transform: translateX(-14vw); }   /* out, left to right */
+            38%  { transform: translateX(102vw); }
+            41%  { transform: translateX(102vw); }   /* turning on the spot */
+            79%  { transform: translateX(-14vw); }   /* back again */
+            100% { transform: translateX(-14vw); }   /* a breather before the next lap */
+        }
+
+        /* The turn takes time rather than snapping: the dog squashes through
+           edge-on, so it reads as pivoting instead of a sprite hitting a wall. */
+        @keyframes hwTurn {
+            0%, 38%   { transform: scaleX(1); }
+            39.5%     { transform: scaleX(.06); }
+            41%, 79%  { transform: scaleX(-1); }
+            80.5%     { transform: scaleX(.06); }
+            82%, 100% { transform: scaleX(1); }
+        }
+
+        @keyframes hwStride { 0%, 100% { transform: rotate(23deg); } 50% { transform: rotate(-23deg); } }
+        @keyframes hwWag { 0%, 100% { transform: rotate(-13deg); } 50% { transform: rotate(15deg); } }
+        @keyframes hwBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* Paw prints, pressed into the snow as the dog passes and fading on their
+           own after about eight seconds. Because every print lives the same length
+           of time, one keyframe set with a per-print delay covers all thirteen. */
+        .hero-paws {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 86px;
+            z-index: 1;
+            height: 44px;
+        }
+
+        .hero-paws span {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            opacity: 0;
+            animation: hwPaw 20s linear infinite;
+            animation-delay: calc(1.05s + var(--i) * .49s);
+        }
+
+        .hero-paws svg { display: block; width: 100%; height: 100%; fill: #16241C; transform: rotate(var(--r, 0deg)); }
+
+        @keyframes hwPaw {
+            0%   { opacity: 0; }
+            1.8% { opacity: .5; }
+            40%  { opacity: .5; }
+            43%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Reduced motion: the dog parks mid-hero with its trail already laid. */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-walk,
+            .hero-walk .face,
+            .hero-walk .bob,
+            .hero-dog .leg,
+            .hero-dog .tail,
+            .hero-paws span,
+            .scroll-hint {
+                animation: none;
             }
-            5% { transform: translateY(-5px) scaleX(-1); }
-            10% { transform: translateY(0) scaleX(-1); }
-            15% { transform: translateY(-5px) scaleX(-1); }
-            20% { transform: translateY(0) scaleX(-1); }
-            25% { transform: translateY(-5px) scaleX(-1); }
-            30% { transform: translateY(0) scaleX(-1); }
-            35% { transform: translateY(-5px) scaleX(-1); }
-            40% { transform: translateY(0) scaleX(-1); }
-            45% { transform: translateY(-5px) scaleX(-1); }
-            48% { 
-                left: 110%; 
-                transform: translateY(0) scaleX(-1);
-            }
-            50% { 
-                left: 110%; 
-                transform: translateY(0) scaleX(1);
-            }
-            55% { transform: translateY(-5px) scaleX(1); }
-            60% { transform: translateY(0) scaleX(1); }
-            65% { transform: translateY(-5px) scaleX(1); }
-            70% { transform: translateY(0) scaleX(1); }
-            75% { transform: translateY(-5px) scaleX(1); }
-            80% { transform: translateY(0) scaleX(1); }
-            85% { transform: translateY(-5px) scaleX(1); }
-            90% { transform: translateY(0) scaleX(1); }
-            95% { transform: translateY(-5px) scaleX(1); }
-            98% { 
-                left: -10%; 
-                transform: translateY(0) scaleX(1);
-            }
-            100% { 
-                left: -10%; 
-                transform: translateY(0) scaleX(-1);
-            }
+            .hero-walk { transform: translateX(44vw); }
+            .hero-paws span { opacity: .5; }
         }
 
         .hero-content {
             position: relative;
             overflow: visible;
+            z-index: 2;
         }
 
         .tagline {
@@ -179,6 +228,7 @@
             transform: translateX(-50%);
             color: white;
             opacity: 0.7;
+            z-index: 2;
             animation: bounce 2s infinite;
         }
 
@@ -628,6 +678,11 @@
         }
 
         @media (max-width: 600px) {
+            /* At phone width thirteen prints would almost touch, so the dog and
+               its tracks both come down a size. */
+            .hero-dog { width: 52px; height: 39px; }
+            .hero-paws span { width: 16px; height: 16px; }
+
             .logo {
                 font-size: 2.5rem;
             }
@@ -662,9 +717,48 @@
             <img src="images/pack_in_snow-w640.jpg" alt="Happy dogs in the snow" class="hero-image" width="640" height="478">
         </picture>
         <div class="hero-overlay"></div>
+        <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+            <symbol id="paw" viewBox="0 0 24 24">
+                <ellipse cx="12" cy="16.5" rx="6.4" ry="5.2"/>
+                <ellipse cx="4.6" cy="9.4" rx="2.3" ry="3.1"/>
+                <ellipse cx="9.5" cy="5.6" rx="2.4" ry="3.3"/>
+                <ellipse cx="15" cy="5.6" rx="2.4" ry="3.3"/>
+                <ellipse cx="19.6" cy="9.4" rx="2.3" ry="3.1"/>
+            </symbol>
+        </svg>
+        <div class="hero-paws" aria-hidden="true">
+            <span style="--i:0;--r:-11deg;left:2%;top:58%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:1;--r:8deg;left:9.5%;top:14%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:2;--r:-7deg;left:17%;top:60%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:3;--r:10deg;left:24.5%;top:16%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:4;--r:-9deg;left:32%;top:56%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:5;--r:6deg;left:39.5%;top:12%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:6;--r:-12deg;left:47%;top:60%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:7;--r:9deg;left:54.5%;top:18%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:8;--r:-6deg;left:62%;top:56%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:9;--r:11deg;left:69.5%;top:14%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:10;--r:-8deg;left:77%;top:60%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:11;--r:7deg;left:84.5%;top:16%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+            <span style="--i:12;--r:-10deg;left:92%;top:58%"><svg viewBox="0 0 24 24"><use href="#paw"/></svg></span>
+        </div>
+        <div class="hero-walk" aria-hidden="true">
+            <span class="face"><span class="bob"><svg class="hero-dog" viewBox="0 0 64 48">
+                <!-- Drawn inline rather than through <use>: a <use> clone lives in a
+                     shadow tree these class selectors cannot reach, and the legs
+                     would render perfectly and never move. -->
+                <rect class="leg leg-ff far" x="39" y="27" width="5" height="15" rx="2.5"/>
+                <rect class="leg leg-rf far" x="16" y="27" width="5" height="15" rx="2.5"/>
+                <path class="tail solid" d="M15 19 q-6 -2 -8.5 -9.5 q6.5 1.5 10 5.5 z"/>
+                <rect class="torso solid" x="13" y="15" width="34" height="15" rx="7.5"/>
+                <circle class="solid" cx="48" cy="14" r="8"/>
+                <path class="solid" d="M53 11 h7.5 a3 3 0 0 1 0 7 h-7.5 z"/>
+                <path class="solid" d="M43.5 7.5 l2.5 -7.5 l5.5 5 z"/>
+                <rect class="leg leg-fn solid" x="40" y="27" width="5.5" height="15" rx="2.75"/>
+                <rect class="leg leg-rn solid" x="17" y="27" width="5.5" height="15" rx="2.75"/>
+            </svg></span></span>
+        </div>
         <div class="hero-content">
             <h1 class="logo">Happy <span>Woof</span> LLC</h1>
-            <div class="logo-dog">🐕</div>
             <p class="tagline">Supervised fun with the Georgetown, CT woof pack</p>
             <a href="#contact" class="hero-cta">Get in Touch</a>
         </div>
