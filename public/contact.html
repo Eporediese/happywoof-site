@@ -40,6 +40,9 @@
         .contact-details div {margin:1rem;}
         .contact-details h3 {color:var(--primary);margin-bottom:0.5rem;}
         .map img {width:100%;max-width:600px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.1);margin:2rem auto;display:block;}
+        /* <picture> wraps each photo so browsers can pick an AVIF; display:contents
+           keeps it out of the layout so the rules above still apply to the <img>. */
+        picture {display:contents;}
         footer {background:var(--text);color:rgba(255,255,255,0.7);padding:2rem;text-align:center;}
         footer p {font-size:0.9rem;}
         @media (max-width:900px){.contact-details{flex-direction:column;align-items:center;}}
@@ -51,7 +54,11 @@
 <body>
     <!-- Hero -->
     <section class="hero">
-        <img src="images/pack_in_snow-1024x765.jpg" alt="Happy dogs in the snow" class="hero-image">
+        <picture>
+            <source type="image/avif" sizes="100vw"
+                    srcset="images/pack_in_snow-w640.avif 640w, images/pack_in_snow-w1024.avif 1024w">
+            <img src="images/pack_in_snow-w640.jpg" alt="Happy dogs in the snow" class="hero-image" width="640" height="478">
+        </picture>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="logo">Contact <span>Happy Woof</span></h1>
@@ -83,7 +90,10 @@
     <!-- Map (static image) -->
     <section class="map">
         <div class="container">
-            <img src="images/map-georgetown.jpg" alt="Map of Georgetown, CT service area">
+            <picture>
+                <source type="image/avif" srcset="images/map-georgetown-w600.avif">
+                <img src="images/map-georgetown-w600.jpg" alt="Map of Georgetown, CT service area" loading="lazy" width="600" height="600">
+            </picture>
             <p style="font-size:0.75rem;color:#888;text-align:center;margin-top:0.5rem;">© <a href="https://www.openstreetmap.org/copyright" style="color:#888;">OpenStreetMap</a> contributors</p>
         </div>
     </section>
